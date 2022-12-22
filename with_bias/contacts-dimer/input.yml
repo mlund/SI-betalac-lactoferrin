@@ -12,7 +12,7 @@ atomlist:
 -   MAN: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
 -   NAG: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
 -   H+: {implicit: true, pactivity: 5.5}
--   ../../../faunus-aminoacid-atoms.json
+-   ../../assets/faunus-aminoacid-atoms.json
 energy:
 -   nonbonded:
         cutoff_g2g: 952.0
@@ -30,13 +30,13 @@ moleculelist:
         insoffset: [0, 0, 0]
         keepcharges: false
         keeppos: false
-        structure: ../../../betalac.aam
+        structure: ../../assets/betalac.aam
 -   lactoferrin:
         insdir: [0, 0, 0]
         insoffset: [60, 0, 0]
         keepcharges: false
         keeppos: false
-        structure: ../../../lactoferrin.aam
+        structure: ../../assets/lactoferrin.aam
 moves:
 -   rcmc: {repeat: 5}
 -   moltransrot:

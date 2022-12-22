@@ -26,17 +26,17 @@ atomlist:
     - MAN: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
     - NAG: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
     - H+: {pactivity: {{pH}}, implicit: True}
-    - "../../faunus-aminoacid-atoms.json"
+    - "../assets/faunus-aminoacid-atoms.json"
 
 moleculelist: # define molecule types
     - betalac: 
-        structure: "../../betalac.aam"
+        structure: "../assets/betalac.aam"
         insdir: [0,0,0] # random insert, 0,0,0 its not random its in the centre 
         insoffset: [0,0,0]
         keeppos: False
         keepcharges: False
     - lactoferrin: 
-        structure: "../../lactoferrin.aam"
+        structure: "../assets/lactoferrin.aam"
         insdir: [0,0,0]
         insoffset: [60,0,0]
         keeppos: False
