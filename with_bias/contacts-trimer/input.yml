@@ -1,0 +1,60 @@
+analysis:
+-   sanity: {nstep: 2000}
+-   xtcfile: {file: traj.xtc, nstep: 10}
+-   multipole: {nstep: 10}
+-   savestate: {file: confout.pqr}
+-   savestate: {file: confout.gro}
+-   savestate: {file: confout.pdb}
+-   savestate: {file: state.json}
+atomlist:
+-   neutral: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
+-   cation: {dp: 50, eps: 0.15, q: 1.0, sigma: 4.0}
+-   anion: {dp: 50, eps: 0.15, q: -1.0, sigma: 4.0}
+-   CYSs: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
+-   FE: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
+-   MAN: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
+-   NAG: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
+-   H+: {implicit: true, pactivity: 5.5}
+-   ../../../faunus-aminoacid-atoms.json
+energy:
+-   nonbonded:
+        cutoff_g2g: 952.0
+        default:
+        -   lennardjones: {mixing: LB}
+        -   coulomb: {debyelength: 30.4, epsr: 80, type: yukawa}
+geometry: {radius: 150, type: sphere}
+insertmolecules:
+-   lactoferrin: {N: 1}
+-   betalac: {N: 2}
+mcloop: {macro: 10, micro: 1000}
+moleculelist:
+-   betalac:
+        insdir: [1, 1, 1]
+        keepcharges: false
+        keeppos: false
+        structure: ../../../betalac.aam
+-   lactoferrin:
+        insdir: [0, 0, 0]
+        keepcharges: false
+        keeppos: false
+        structure: ../../../lactoferrin.aam
+moves:
+-   rcmc: {repeat: 5}
+-   moltransrot:
+        dir: [1, 1, 1]
+        dp: 6
+        dprot: 0.5
+        molecule: betalac
+random: {seed: fixed}
+reactionlist:
+-   HCTR = CTR + H+: {pK: 3.67}
+-   HASP = ASP + H+: {pK: 4.0}
+-   HGLU = GLU + H+: {pK: 4.4}
+-   HHIS = HIS + H+: {pK: 6.54}
+-   HCYS = CYS + H+: {pK: 8.55}
+-   HNTR = NTR + H+: {pK: 8.0}
+-   HTYR = TYR + H+: {pK: 9.84}
+-   HLYS = LYS + H+: {pK: 10.4}
+-   HARG = ARG + H+: {pK: 12.0}
+temperature: 300
+
