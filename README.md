@@ -19,6 +19,6 @@ and make sure all required packages are loaded by issuing the following terminal
 
 ``` bash
     conda env create -f environment.yml
-    source activate my_environment
-    jupyter-notebook
+    source activate betalac
+    jupyter-lab
 ```
