@@ -2,7 +2,8 @@
 
 # β-lactoglobulin dimer ↔︎ Lactoferrin Association
 
-In this notebook we explore the interaction between lactoferrin and a β-lactoglobulin dimer using Metropolis-Hastings Monte Carlo (MC) simulations
+In this notebook we explore the interaction between lactoferrin and a β-lactoglobulin dimer using
+Metropolis-Hastings Monte Carlo (MC) simulations
 
 ## Layout
 
@@ -13,12 +14,13 @@ Description of the directory layout.
 
 ## Requirements
 
-To run the Notebooks online, click on the _Launch Binder_ logo above. Alternatively, if you want to run on your own computer,
-install python using e.g. [Miniconda](https://conda.io/miniconda.html) or [Anaconda](https://docs.conda.io))
-and make sure all required packages are loaded by issuing the following terminal commands
+To run the Notebooks online, click on the _Launch Binder_ logo above.
+Alternatively, run it locally by
+installing python using e.g. [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge).
+An environment with the required packages is then created with:
 
 ``` bash
-    conda env create -f environment.yml
+    mamba env create -f environment.yml
     source activate betalac
     jupyter-lab
 ```
