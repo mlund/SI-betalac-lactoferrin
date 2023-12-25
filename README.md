@@ -1,4 +1,10 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mlund/SI-betalac-lactoferrin/HEAD)
+[![CC BY 4.0][cc-by-shield]][cc-by]
+[![ruff](https://github.com/mlund/SI-betalac-lactoferrin/actions/workflows/ruff.yml/badge.svg)](https://github.com/mlund/SI-betalac-lactoferrin/actions/workflows/ruff.yml)
+
+[cc-by]: http://creativecommons.org/licenses/by/4.0/
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
+
 
 # β-lactoglobulin dimer ↔︎ Lactoferrin Association
 

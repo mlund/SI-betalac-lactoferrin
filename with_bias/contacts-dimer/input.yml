@@ -1,8 +1,10 @@
 analysis:
 -   sanity: {nstep: 2000}
 -   xtcfile: {file: traj.xtc, nstep: 10}
+-   systemenergy: {file: energy.dat.gz, nstep: 10, save_min_conf: true}
 -   savestate: {file: confout.pqr}
 -   savestate: {file: state.json}
+-   reactioncoordinate: {file: R.dat.gz, nstep: 5, type: molecule, property: com_x, index: 1}
 atomlist:
 -   neutral: {dp: 50, eps: 0.15, q: 0, sigma: 4.0}
 -   cation: {dp: 50, eps: 0.15, q: 1.0, sigma: 4.0}
@@ -23,7 +25,7 @@ geometry: {radius: 150, type: sphere}
 insertmolecules:
 -   betalac: {N: 1}
 -   lactoferrin: {N: 1}
-mcloop: {macro: 10, micro: 1000}
+mcloop: {macro: 10, micro: 100}
 moleculelist:
 -   betalac:
         insdir: [0, 0, 0]

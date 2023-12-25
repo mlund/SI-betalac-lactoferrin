@@ -1,16 +1,30 @@
 {
   "analysis": [
     {
-      "sanity": {
-        "nstep": 2000,
-        "samples": 5
-      }
+      "sanity": null
     },
     {
       "xtcfile": {
         "file": "traj.xtc",
         "nstep": 10,
-        "samples": 1000
+        "samples": 100
+      }
+    },
+    {
+      "systemenergy": {
+        "Cv/kB": 22.845,
+        "file": "energy.dat.gz",
+        "final": [
+          0.0,
+          0.0,
+          7834.823201908088
+        ],
+        "init": 7831.2,
+        "mean": 7838.5,
+        "nstep": 10,
+        "relative time": 0.0554,
+        "samples": 100,
+        "save_min_conf": true
       }
     },
     {
@@ -22,15 +36,26 @@
       "savestate": {
         "file": "state.json"
       }
+    },
+    {
+      "reactioncoordinate": {
+        "average": 51.832306635734334,
+        "file": "R.dat.gz",
+        "index": 1,
+        "nstep": 5,
+        "property": "com_x",
+        "samples": 200,
+        "type": "molecule"
+      }
     }
   ],
-  "compiler": "11.3.0",
+  "compiler": "Apple LLVM 15.0.0 (clang-1500.1.0.2.5)",
   "energy": [
     {
       "hamiltonian": [
         {
           "ContainerOverlap": {
-            "relative time": 3.679994340806299e-05
+            "relative time": 8.196622191986444e-05
           }
         },
         {
@@ -39,7 +64,7 @@
             "molecules": [
               "*"
             ],
-            "relative time": 0.0004716235575550533
+            "relative time": 0.004850134035373108
           }
         },
         {
@@ -63,7 +88,7 @@
                       "cutoff": 1.3407807929942596e+154,
                       "debyelength": 30.400000000000002,
                       "doi": "Premier mémoire sur l’électricité et le magnétisme by Charles-Augustin de Coulomb",
-                      "lB": 6.962495528978002,
+                      "lB": 6.9624955289780015,
                       "type": "plain"
                     },
                     "debyelength": 30.4,
@@ -73,7 +98,7 @@
                 }
               ]
             },
-            "relative time": 0.49602039473893705,
+            "relative time": 0.46610937516913936,
             "selfenergy": {
               "dipole": false,
               "monopole": true
@@ -88,7 +113,7 @@
     "radius": 150.0,
     "type": "sphere"
   },
-  "git revision": "071ec890 (2022-12-02)",
+  "git revision": "00ce6677 (2023-11-30)",
   "groups": [
     {
       "betalac": {
@@ -112,62 +137,63 @@
     }
   ],
   "montecarlo": {
-    "average potential energy (kT)": 7836.810811965802,
-    "last move": "rcmc"
+    "average potential energy (kT)": 7838.371181842979,
+    "last move": "moltransrot"
   },
   "moves": [
     {
       "rcmc": {
-        "acceptance": 0.148,
+        "acceptance": 0.161,
         "cite": "doi:10/fqcpg3",
-        "moves": 50021,
+        "moves": 5028,
         "reactions": {
           "HARG = ARG + H+": {
             "acceptance -->": 0.0,
             "acceptance <--": null,
-            "attempts": 2731
+            "attempts": 250
           },
           "HASP = ASP + H+": {
-            "acceptance -->": 0.512,
-            "acceptance <--": 0.341,
-            "attempts": 4629
+            "acceptance -->": 0.619,
+            "acceptance <--": 0.371,
+            "attempts": 470
           },
           "HCTR = CTR + H+": {
             "acceptance -->": null,
             "acceptance <--": 0.0,
-            "attempts": 2849
+            "attempts": 292
           },
           "HCYS = CYS + H+": {
-            "acceptance -->": 0.00995,
+            "acceptance -->": 0.0198,
             "acceptance <--": 1.0,
-            "attempts": 2842
+            "attempts": 309
           },
           "HGLU = GLU + H+": {
-            "acceptance -->": 0.486,
-            "acceptance <--": 0.472,
-            "attempts": 5523
+            "acceptance -->": 0.461,
+            "acceptance <--": 0.484,
+            "attempts": 578
           },
           "HHIS = HIS + H+": {
-            "acceptance -->": 0.474,
-            "acceptance <--": 0.484,
-            "attempts": 5503
+            "acceptance -->": 0.522,
+            "acceptance <--": 0.513,
+            "attempts": 545
           },
           "HLYS = LYS + H+": {
-            "acceptance -->": 0.00107,
-            "acceptance <--": 1.0,
-            "attempts": 2813
+            "acceptance -->": 0.0,
+            "acceptance <--": null,
+            "attempts": 287
           },
           "HNTR = NTR + H+": {
-            "acceptance -->": 0.0215,
+            "acceptance -->": 0.0366,
             "acceptance <--": 1.0,
-            "attempts": 2796
+            "attempts": 255
           },
           "HTYR = TYR + H+": {
-            "acceptance -->": 0.0128,
+            "acceptance -->": 0.00949,
             "acceptance <--": 1.0,
-            "attempts": 2764
+            "attempts": 319
           }
         },
+        "relative time": 0.0183,
         "repeat": 5,
         "stochastic": true
       }
@@ -175,7 +201,7 @@
     {
       "moltransrot": {
         "R/Å ≈ √(⟨r²⟩/4⟨θ²⟩)": 0.0,
-        "acceptance": 0.36,
+        "acceptance": 0.381,
         "dir": [
           0.0,
           0.0,
@@ -190,19 +216,19 @@
         "dprot": 0.5,
         "molecule": "betalac",
         "molid": 0,
-        "moves": 10032,
-        "relative time": 0.493,
+        "moves": 999,
+        "relative time": 0.466,
         "repeat": 1,
         "stochastic": true,
         "√⟨r²⟩": 0.0,
-        "√⟨θ²⟩": 0.0606,
-        "√⟨θ²⟩/°": 3.47
+        "√⟨θ²⟩": 0.062,
+        "√⟨θ²⟩/°": 3.55
       }
     },
     {
       "moltransrot": {
-        "R/Å ≈ √(⟨r²⟩/4⟨θ²⟩)": 6.21,
-        "acceptance": 0.113,
+        "R/Å ≈ √(⟨r²⟩/4⟨θ²⟩)": 7.05,
+        "acceptance": 0.125,
         "dir": [
           1.0,
           0.0,
@@ -217,25 +243,25 @@
         "dprot": 0.5,
         "molecule": "lactoferrin",
         "molid": 1,
-        "moves": 9947,
-        "relative time": 0.496,
+        "moves": 973,
+        "relative time": 0.455,
         "repeat": 1,
         "stochastic": true,
-        "√⟨r²⟩": 0.423,
-        "√⟨θ²⟩": 0.0341,
-        "√⟨θ²⟩/°": 1.95
+        "√⟨r²⟩": 0.493,
+        "√⟨θ²⟩": 0.0349,
+        "√⟨θ²⟩/°": 2.0
       }
     }
   ],
   "number of groups": 2,
   "number of particles": 1011,
-  "number of sweeps": 10000,
+  "number of sweeps": 1000,
   "reactionlist": [
     {
       "HCTR = CTR + H+": {
         "lnK": -8.450487291288148,
         "neutral": false,
-        "pK": 3.6699999999999995,
+        "pK": 3.67,
         "pK'": -1.8299999999999998,
         "swap_move": true
       }
@@ -244,7 +270,7 @@
       "HASP = ASP + H+": {
         "lnK": -9.210340371976184,
         "neutral": false,
-        "pK": 3.9999999999999996,
+        "pK": 4.0,
         "pK'": -1.4999999999999998,
         "swap_move": true
       }
@@ -272,7 +298,7 @@
         "lnK": -19.687102545099094,
         "neutral": false,
         "pK": 8.55,
-        "pK'": 3.0500000000000007,
+        "pK'": 3.050000000000001,
         "swap_move": true
       }
     },
@@ -280,7 +306,7 @@
       "HNTR = NTR + H+": {
         "lnK": -18.420680743952367,
         "neutral": false,
-        "pK": 7.999999999999999,
+        "pK": 8.0,
         "pK'": 2.5,
         "swap_move": true
       }
@@ -299,7 +325,7 @@
         "lnK": -23.94688496713808,
         "neutral": false,
         "pK": 10.4,
-        "pK'": 4.9,
+        "pK'": 4.900000000000001,
         "swap_move": true
       }
     },
@@ -313,10 +339,10 @@
       }
     }
   ],
-  "relative drift": 3.5136005713642105e-14,
+  "relative drift": -2.4853423291414522e-14,
   "simulation time": {
-    "in minutes": 4.516666666666667,
-    "in seconds": 271
+    "in minutes": 0.6833333333333333,
+    "in seconds": 41
   },
   "temperature": 300.0
 }
