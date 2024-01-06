@@ -12,4 +12,5 @@ dependencies:
     - ruamel_yaml=0.15
     - jupyterlab=3
     - notebook=6
+    - ruff=0.1
     - faunus=2.11
