@@ -1,7 +1,7 @@
 {% set debyelength = 3.04/Cs**0.5 %}
 {% set kappa = Cs**0.5 / 3.04 %}
 {% set radius = 40 %}
-{% set length = 350 %}
+{% set length = 250 %}
 {% set volume = 3.14159265359*radius**2*length %}
 {% set Nsalt = (Cs*10**-27 * 6.022*10**23 * volume)|round|int %}
 
@@ -68,24 +68,23 @@ reactionlist:
     - = Na+ + Cl-: {} # activates grand canonical salt
 
 moves:
-     - rcmc: {repeat: 5}
+     - rcmc: {repeat: 20}
      - transrot: {molecule: Na+, repeat: N}
      - transrot: {molecule: Cl-, repeat: N}
-     - moltransrot: {molecule: betalac, dir: [0,0,0], dp: 0, dprot: 0.05}
-     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 0.05, repeat: 5}
-     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 6.28, repeat: 1} 
+     - moltransrot: {molecule: betalac, dir: [0,0,0], dp: 0, dprot: 0.5}
+     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 0.5} 
      
 analysis:
-    - virtualtranslate: {file: vt.dat.gz, dL: 0.01, molecule: lactoferrin, nstep: 50, dir: [0,0,1]}
-    - systemenergy: {file: energy.dat.gz, nstep: 5} # save system energy
+    - virtualtranslate: {file: vt.dat.gz, dL: 0.001, molecule: lactoferrin, nstep: 50, dir: [0,0,1]}
+    - systemenergy: {file: energy.dat.gz, nstep: 500} # save system energy
     - sanity: {nstep: 2000}                           # is the simulation OK?
-    - chargefluctuations: {nstep: 10, molecule: betalac, pqrfile: betalac_avg.pqr}
-    - chargefluctuations: {nstep: 10, molecule: lactoferrin, pqrfile: lactoferrin_avg.pqr}
+    - chargefluctuations: {nstep: 100, molecule: betalac, pqrfile: betalac_avg.pqr}
+    - chargefluctuations: {nstep: 100, molecule: betalac, pqrfile: lactoferrin_avg.pqr}
     - multipole: {nstep: 10}
     - savestate: {file: confout.xyz}
     - savestate: {file: confout.pqr} # save PQR file for visualization
     - savestate: {file: state.json } # save restart file
-    - multipoledist: {file: multipole.dat.gz, nstep: 5, molecules: [betalac, lactoferrin], dr: 0.25}
+    - multipoledist: {file: multipole.dat, nstep: 5, molecules: [betalac, lactoferrin], dr: 0.25}
 
 mcloop: {macro: 10, micro: {{micro}}}  # number of MC steps
 geometry: {type: cylinder, radius: {{radius}}, length: {{length}}}  # sidelength(s): number OR array
