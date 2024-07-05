@@ -1,0 +1,95 @@
+{% set kappa = la*Cs**0.5 / 3.04 %}
+{% set debyelength = 1/(Cs**0.5 / 3.04) %}
+{% set radius = 40 %}
+{% set length = 300 %}
+{% set volume = 3.14159265359*radius**2*length %}
+{% set Nsalt = (Cs*10**-27 * 6.022*10**23 * volume)|round|int %}
+
+energy:
+    - nonbonded:
+        default: 
+            - lennardjones: {mixing: LB}
+            - coulomb: {type: yukawa, epsr: 80, debyelength: {{debyelength}}}
+
+atomlist:
+    - na: { q: {{(1 - la) * 1.0}}, sigma: 4.6, mw: 1, dp: 50, eps: 0.005 }
+    - cl: { q: {{(1 - la) * -1.0}}, sigma: 4.6, mw: 1, dp: 50, eps: 0.005 }
+    - neutral: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
+    - cation: {q: 1.0, eps: 0.15, sigma: 4.0, dp: 50}
+    - anion: {q: -1.0, eps: 0.15, sigma: 4.0, dp: 50}
+    - CYSs: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
+    - FE: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
+    - MAN: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
+    - NAG: {q: 0, eps: 0.15, sigma: 4.0, dp: 50}
+    - H+: {pactivity: {{pH}}, implicit: True}
+    - "../../../assets/faunus-aminoacid-atoms.json"
+
+
+moleculelist:
+    - betalac: 
+        structure: "../../../assets/betalac-v2.aam"
+        insdir: [0,0,0] # random insert, 0,0,0 its not random its in the centre 
+        insoffset: [0,0,0]
+        keeppos: False
+        keepcharges: False
+    - lactoferrin: 
+        structure: "../../../assets/lactoferrin.aam"
+        insdir: [0,0,0]
+        insoffset: [0,0, {{ off_val }} ]
+        keeppos: False
+        keepcharges: False
+    - Na+: {atoms: [na], atomic: true, activity: {{ Cs }} }
+    - Cl-: {atoms: [cl], atomic: true, activity: {{ Cs }} }
+    
+    
+insertmolecules:
+    - betalac: {N: 1}
+    - lactoferrin: {N: 1}
+    - Na+: {N: 300}
+    - Cl-: {N: 250}
+
+
+moves:
+     - temper: {format: xyzqi, nstep: 100}
+     - rcmc: {repeat: 20}
+     - transrot: {molecule: Na+, repeat: N}
+     - transrot: {molecule: Cl-, repeat: N}
+     - moltransrot: {molecule: betalac, dir: [0,0,0], dp: 0, dprot: 0.5}
+     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 0.5, repeat: 10}
+     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 6.28, repeat: 1} 
+      
+reactionlist:
+     - = Na+ + Cl-: {} # activates grand canonical salt
+     - HCTR + Cl- = CTR + H+:  {pK: 3.67}
+     - HASP + Cl- = ASP + H+:  {pK: 4.0}
+     - HGLU + Cl- = GLU + H+:  {pK: 4.4}
+     - HHIS + Cl- = HIS + H+:  {pK: 6.54}
+     - HCYS + Cl- = CYS + H+:  {pK: 8.55}
+     - HNTR + Cl- = NTR + H+:  {pK: 8.0}
+     - HTYR + Cl- = TYR + H+:  {pK: 9.84}
+     - HLYS + Cl- = LYS + H+:  {pK: 10.4}
+     - HARG + Cl- = ARG + H+:  {pK: 12.0}
+     - HCTR = Na+ + CTR + H+:  {pK: 3.67}
+     - HASP = Na+ + ASP + H+:  {pK: 4.0}
+     - HGLU = Na+ + GLU + H+:  {pK: 4.4}
+     - HHIS = Na+ + HIS + H+:  {pK: 6.54}
+     - HCYS = Na+ + CYS + H+:  {pK: 8.55}
+     - HNTR = Na+ + NTR + H+:  {pK: 8.0}
+     - HTYR = Na+ + TYR + H+:  {pK: 9.84}
+     - HLYS = Na+ + LYS + H+:  {pK: 10.4}
+     - HARG = Na+ + ARG + H+:  {pK: 12.0}
+     
+    
+analysis:
+    - virtualtranslate: {file: vt.dat, dL: 0.01, molecule: lactoferrin, nstep: 1, dir: [0,0,1]}
+    - systemenergy: {file: energy.dat, nstep: 50} # save system energy
+    - sanity: {nstep: 1}                           # is the simulation OK?
+    - savestate: {file: confout.pqr}
+    - xtcfile: {file: traj.xtc, nstep: 100}
+    - savestate: {file: state.json } # save restart file
+   
+
+mcloop: {macro: 10, micro: {{micro}}}  # number of MC steps
+geometry: {type: cylinder, radius: {{radius}}, length: {{length}}}  # sidelength(s): number OR array
+temperature: 300                       # in K
+random: {seed: fixed}                  # seed for pseudo random number generator
