@@ -15,8 +15,14 @@ Metropolis-Hastings Monte Carlo (MC) simulations
 
 Description of the directory layout.
 
+- `assets`. This contains structure files of the proteins used for the simulations as well as list with definitions of coarse grained amino acids, also used in the simulations.
+
 - `with_bias`. This contains a notebook for running and analysing MC simulations with a biasing potential to allow to
-  better sampling along the protein mass-center separation.
+ better sampling along the protein mass-center separation.
+
+- `explicit_ions`. This contains a notebook for running MC simulations with explicit ions and one where parallel tempering is used for MC simulations with explicit ions. Additionally a separate notebook for plotting and analysing is included
+
+- `minsep_perturbation`. This contains a notebook to run and analyse the MC simulations and to study the free energy difference in the minimum and compare it with ITC experimental results. 
 
 ## Requirements
 

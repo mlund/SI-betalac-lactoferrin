@@ -1,16 +1,11 @@
 {% set debyelength = 3.04/Cs**0.5 %}
 {% set kappa = Cs**0.5 / 3.04 %}
+{% set radius = 40 %}
+{% set length = 350 %}
+{% set volume = 3.14159265359*radius**2*length %}
+{% set Nsalt = (Cs*10**-27 * 6.022*10**23 * volume)|round|int %}
 
 energy:
-    - custom-groupgroup:
-        name1: betalac
-        name2: lactoferrin
-        function: >
-            -lB * Z1 * Z2 * (sinh(ka) / ka)^2 * ((1 + ka * 1/tanh(ka)) / R - kappa/2) * exp(-kappa*R)
-        constants:
-            kappa: {{ kappa }}
-            ka: {{ kappa * 36 }}
-            lB: 7.0
     - nonbonded:
         default: 
             - lennardjones: {mixing: LB}
@@ -27,19 +22,19 @@ atomlist:
     - na:   { q: 1.0, sigma: 4.6, mw: 1, dp: 50, eps: 0.005 }
     - cl:   { q: -1.0, sigma: 4.6, mw: 1, dp: 50, eps: 0.005 }
     - H+: {pactivity: {{pH}}, implicit: True}
-    - "../../assets/faunus-aminoacid-atoms.json"
+    - "../../../assets/faunus-aminoacid-atoms.json"
 
 moleculelist: # define molecule types
     - betalac: 
-        structure: "../../assets/betalac.aam"
+        structure: "../../../assets/betalac-v2.aam"
         insdir: [0,0,0] # random insert, 0,0,0 its not random its in the centre 
         insoffset: [0,0,0]
         keeppos: False
         keepcharges: False
     - lactoferrin: 
-        structure: "../../assets/lactoferrin.aam"
+        structure: "../../../assets/lactoferrin.aam"
         insdir: [0,0,0]
-        insoffset: [60,0,0]
+        insoffset: [0,0,{{offset}}] #changed from in x to in z
         keeppos: False
         keepcharges: False
     - Na+: {atoms: [na], atomic: true, activity: {{ Cs }} }
@@ -48,8 +43,8 @@ moleculelist: # define molecule types
 insertmolecules: # create an initial system (random insertion)
      - betalac: {N: 1}
      - lactoferrin: {N: 1}
-     - Na+: {N: 258}
-     - Cl-: {N: 200}
+     - Na+: {N: 358}
+     - Cl-: {N: 300}
      
 reactionlist:
     - HCTR + Cl- = CTR + H+:  {pK: 3.67}
@@ -73,28 +68,26 @@ reactionlist:
     - = Na+ + Cl-: {} # activates grand canonical salt
 
 moves:
-     #- temper: {format: xyzqi}
      - rcmc: {repeat: 5}
      - transrot: {molecule: Na+, repeat: N}
      - transrot: {molecule: Cl-, repeat: N}
-     - moltransrot: {molecule: betalac, dir: [0,0,0], dp: 0, dprot: 0.5}
-     - moltransrot: {molecule: lactoferrin, dir: [1,0,0], dp: 3, dprot: 0.5} 
+     - moltransrot: {molecule: betalac, dir: [0,0,0], dp: 0, dprot: 0.05}
+     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 0.05, repeat: 5}
+     - moltransrot: {molecule: lactoferrin, dir: [0,0,0], dp: 0, dprot: 6.28, repeat: 1} 
      
 analysis:
-    - virtualtranslate: {file: vt.dat.gz, dL: 0.05, molecule: lactoferrin, nstep: 5, dir: [1,0,0]}
-    - reactioncoordinate: {file: R.dat.gz, nstep: 5, type: molecule, property: com_x, index: 1}
+    - virtualtranslate: {file: vt.dat.gz, dL: 0.01, molecule: lactoferrin, nstep: 50, dir: [0,0,1]}
     - systemenergy: {file: energy.dat.gz, nstep: 5} # save system energy
     - sanity: {nstep: 2000}                           # is the simulation OK?
     - chargefluctuations: {nstep: 10, molecule: betalac, pqrfile: betalac_avg.pqr}
-    - chargefluctuations: {nstep: 10, molecule: betalac, pqrfile: lactoferrin_avg.pqr}
-    - molrdf: {file: rdf.dat, nstep: 5, dr: 0.25, name1: betalac, name2: lactoferrin, dim: 1}
+    - chargefluctuations: {nstep: 10, molecule: lactoferrin, pqrfile: lactoferrin_avg.pqr}
     - multipole: {nstep: 10}
+    - savestate: {file: confout.xyz}
     - savestate: {file: confout.pqr} # save PQR file for visualization
     - savestate: {file: state.json } # save restart file
-    - multipoledist: {file: multipole.dat, nstep: 5, molecules: [betalac, lactoferrin], dr: 0.25}
-    - atom_density: {nstep: 10}
+    - multipoledist: {file: multipole.dat.gz, nstep: 5, molecules: [betalac, lactoferrin], dr: 0.25}
 
 mcloop: {macro: 10, micro: {{micro}}}  # number of MC steps
-geometry: {type: sphere, radius: 150}  # sidelength(s): number OR array
+geometry: {type: cylinder, radius: {{radius}}, length: {{length}}}  # sidelength(s): number OR array
 temperature: 300                       # in K
 random: {seed: fixed}                  # seed for pseudo random number generator
