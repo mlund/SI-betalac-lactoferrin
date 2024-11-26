@@ -1,45 +1,39 @@
 {
-    "title": "Electronic Notebook: Some title...",
-    "description": "This repository contains electronic notebooks (Jupyter) for reproducing the simulation results presented in ...",
-    "creators": [
-        {
-            "name": "Mikael Lund",
-            "affiliation": "Division of Computational Chemistry, Department of Chemistry, Lund University, Sweden",
-            "orcid": "0000-0001-8178-8175"
-        },
-	{	
-	    "name": "Isabel Vinterbladh",
-            "affiliation": "Division of Computational Chemistry, Department of Chemistry, Lund University, Sweden",
-            "orcid": "0009-0007-0801-2611"
-	}
-    ],
-    "contributors": [
-        {
-            "name": "Alfons Åberg",
-            "orcid": "0000-0000-0000-0000",
-            "type": "Researcher",
-            "affiliation": "Department of ..."
-        }
-    ],
-    "keywords": [
-        "reproducible science",
-        "electronic notebooks"
-    ],
-    "related_identifiers": [
-        {
-            "scheme": "url",
-            "identifier": "https://github.com/mlund/SI-betalac-lactoferrin/",
-            "relation": "isSupplementTo"
-        },
-        {
-            "scheme": "doi",
-            "identifier": "",
-            "relation": "isSupplementTo"
-        }
-    ],
-    "license": {
-        "id": "CC0-1.0"
+  "title": "Electronic Notebook: Strong Electrostatic Attraction Drives Milk Heteroprotein Complex Coacervation",
+  "description": "This is a collection of electronic material and workflows related to the article reference below. The article abstract is as follows: Coacervates of oppositely charged milk proteins are used in functional food development, mainly to encapsulate bioactives. To uncover the driving forces behind coacervates formation, we study the association of lactoferrin and lactoglobulin at amino-acid level detail, using molecular simulations. Our findings show that inter-protein electrostatic interactions dominate and are, surprisingly, equally divided between an isotropic part, due to monopole-monopole attraction of the oppositely charged proteins, and an anisotropic part due to uneven surface charge distributions. In good agreement with recent experimental association constants, the calculated protein-protein interaction free energy is strongly dependent on pH and salt concentration. In addition to thermodynamics, we also investigate amino acid contacts in microstates of trimeric and pentameric protein complexes, and identify interaction hot-spots that drive heteroprotein complex coacervation process.",
+  "creators": [
+    {
+      "name": "Mikael Lund",
+      "affiliation": "Division of Computational Chemistry, Department of Chemistry, Lund University, Sweden",
+      "orcid": "0000-0001-8178-8175"
     },
-    "access_right": "open",
-    "upload_type": "software"
+    {
+      "name": "Isabel Vinterbladh",
+      "affiliation": "Division of Computational Chemistry, Department of Chemistry, Lund University, Sweden",
+      "orcid": "0009-0007-0801-2611"
+    }
+  ],
+  "keywords": [
+    "reproducible science",
+    "electronic notebooks",
+    "milk protein",
+    "coacervates",
+    "electrostatic interactions",
+    "Metropolis-Hastings Monte Carlo"
+  ],
+  "related_identifiers": [
+    {
+      "scheme": "url",
+      "identifier": "https://github.com/mlund/SI-betalac-lactoferrin/",
+      "relation": "isSupplementTo"
+    },
+    {
+      "scheme": "doi",
+      "identifier": "10.1016/j.ijbiomac.2024.137790",
+      "relation": "isSupplementTo"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "upload_type": "workflow"
 }
