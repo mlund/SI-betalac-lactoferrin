@@ -32,7 +32,7 @@ installing python using e.g. [Mambaforge](https://github.com/conda-forge/minifor
 An environment with the required packages is then created with:
 
 ``` bash
-    mamba env create -f environment.yml
-    source activate betalac
-    jupyter-lab
+mamba env create -f environment.yml
+source activate betalac
+jupyter-lab
 ```
